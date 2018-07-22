@@ -2,7 +2,7 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkWindow" id="ClosingDialog">
+  <object class="GtkWindow" id="window">
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
@@ -13,6 +13,7 @@
     <property name="skip_pager_hint">True</property>
     <property name="urgency_hint">True</property>
     <property name="deletable">False</property>
+    <signal name="destroy" handler="gtk_main_quit" swapped="no"/>
     <child>
       <placeholder/>
     </child>

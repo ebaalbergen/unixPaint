@@ -6,10 +6,20 @@ class MainProgram
 
     private static Window window;
 
+    private static void testScreen()
+    {
+        var builder = new Builder ();
+        builder.add_from_file("userInterfaces/closeDialog.ui");
+        builder.connect_signals(null);
+        var window = builder.get_object ("window") as Window;
+        window.show_all();
+        Gtk.main();
+    }
+
     public static void main(string[] args)
     {
         saved = false;
-        Gtk.init( ref args);
+        Gtk.init(ref args);
 
         window = new Window();
 
@@ -23,7 +33,10 @@ class MainProgram
         var titleBar = new HeaderBar();
         titleBar.set_show_close_button(true);
         titleBar.title = "unixPaint";
-        titleBar.pack_start(new Button.with_label("Click me!"));
+
+        var testButton = new Button.with_label("Click!");
+        testButton.clicked.connect(MainProgram.testScreen);
+        titleBar.pack_start(testButton);
 
         window.set_titlebar(titleBar);
 
