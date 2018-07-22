@@ -1,6 +1,6 @@
 VALAC=valac
-VALAFILES=main.vala
-VALAPKGS=--pkg gtk+-3.0
+VALAFILES=main.vala ClosingFile.vala
+VALAPKGS=--pkg gtk+-3.0 --pkg gmodule-2.0
 VALAPTS=
 
 EXEC=main
