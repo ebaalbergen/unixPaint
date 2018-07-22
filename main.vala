@@ -10,7 +10,7 @@ class MainProgram
 
     private static void testScreen()
     {
-        var dialog = new ClosingFile(args);
+        var dialog = new ClosingFile(ref window);
         dialog.run();
     }
 
