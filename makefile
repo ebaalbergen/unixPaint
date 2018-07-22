@@ -10,3 +10,6 @@ default:
 
 run:
 	./$(EXEC)
+
+clean:
+	rm -rf ./$(EXEC)
