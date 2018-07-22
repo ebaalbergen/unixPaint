@@ -2,18 +2,21 @@ using Gtk;
 
 class MainProgram
 {
+    private static string[] args;
+
     private static bool saved;
 
     private static Window window;
 
     private static void testScreen()
     {
-        var dialog = new ClosingFile();
+        var dialog = new ClosingFile(args);
         dialog.run();
     }
 
     public static void main(string[] args)
     {
+        MainProgram.args = args;
         saved = false;
         Gtk.init(ref args);
 
@@ -33,6 +36,7 @@ class MainProgram
         var testButton = new Button.with_label("Click!");
         testButton.clicked.connect(MainProgram.testScreen);
         titleBar.pack_start(testButton);
+        titleBar.destroy.connect(Gtk.main_quit);
 
         window.set_titlebar(titleBar);
 
