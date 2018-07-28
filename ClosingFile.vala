@@ -4,6 +4,8 @@ class ClosingFile
 {
     Window window;
 
+    public signal void saveFile();
+
     public ClosingFile(ref Window transient)
     {
         try
@@ -26,14 +28,12 @@ class ClosingFile
     {
         switch(response_id)
         {
-            case -9:
-                Gtk.main_quit();
-                break;
             case -8:
-                // TODO: Make the application actually save the image.
-                print("Save");
+                saveFile();
                 break;
             case -4:
+            case -9:
+                Gtk.main_quit();
                 break;
         }
     }

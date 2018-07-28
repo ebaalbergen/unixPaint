@@ -8,10 +8,17 @@ class MainProgram
 
     private static Window window;
 
-    private static void testScreen()
+    private static bool testScreen(Widget widget, Gdk.EventAny e)
     {
         var dialog = new ClosingFile(ref window);
+        dialog.saveFile.connect(MainProgram.save);
         dialog.run();
+        return true;
+    }
+
+    public static void save()
+    {
+        print("Test Save");
     }
 
     public static void main(string[] args)
@@ -27,14 +34,14 @@ class MainProgram
         window.border_width = 10;
         window.window_position = WindowPosition.CENTER;
         window.set_default_size(600, 450);
-        window.destroy.connect(Gtk.main_quit);
+        window.delete_event.connect(MainProgram.testScreen);
 
         var titleBar = new HeaderBar();
         titleBar.set_show_close_button(true);
         titleBar.title = "unixPaint";
 
         var testButton = new Button.with_label("Click!");
-        testButton.clicked.connect(MainProgram.testScreen);
+        //testButton.clicked.connect(MainProgram.testScreen);
         titleBar.pack_start(testButton);
         titleBar.destroy.connect(Gtk.main_quit);
 
