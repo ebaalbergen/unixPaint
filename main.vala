@@ -36,17 +36,6 @@ class MainProgram
         window.set_default_size(600, 450);
         window.delete_event.connect(MainProgram.testScreen);
 
-        var titleBar = new HeaderBar();
-        titleBar.set_show_close_button(true);
-        titleBar.title = "unixPaint";
-
-        var testButton = new Button.with_label("Click!");
-        //testButton.clicked.connect(MainProgram.testScreen);
-        titleBar.pack_start(testButton);
-        titleBar.destroy.connect(Gtk.main_quit);
-
-        window.set_titlebar(titleBar);
-
         var button = new Button.with_label("Click me!");
         button.clicked.connect(() =>
         {
