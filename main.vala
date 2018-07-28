@@ -7,18 +7,24 @@ class MainProgram
     private static bool saved;
 
     private static Window window;
+    private static ClosingFile dialog;
 
     private static bool testScreen(Widget widget, Gdk.EventAny e)
     {
-        var dialog = new ClosingFile(ref window);
-        dialog.saveFile.connect(MainProgram.save);
-        dialog.run();
+        dialog = new ClosingFile(ref window);
+        dialog.save_file_handler.connect(MainProgram.save);
         return true;
     }
 
-    public static void save()
+    public static void save(bool saving)
     {
-        print("Test Save");
+        if(saving)
+        {
+            print("Save");
+        } else
+        {
+            Gtk.main_quit();
+        }
     }
 
     public static void main(string[] args)

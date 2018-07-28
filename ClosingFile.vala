@@ -4,7 +4,7 @@ class ClosingFile
 {
     Window window;
 
-    public signal void saveFile();
+    public signal void save_file_handler(bool saving);
 
     public ClosingFile(ref Window transient)
     {
@@ -26,20 +26,7 @@ class ClosingFile
     [CCode (instance_pos = -1)]
     public void response(Gtk.Dialog source, int response_id)
     {
-        switch(response_id)
-        {
-            case -8:
-                saveFile();
-                break;
-            case -4:
-            case -9:
-                Gtk.main_quit();
-                break;
-        }
-    }
-
-    public void run()
-    {
-        window.show();
+        window.hide();
+        save_file_handler(!(response_id == -9 || response_id == -4));
     }
 }
