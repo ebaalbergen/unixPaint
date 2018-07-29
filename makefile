@@ -17,4 +17,7 @@ clean:
 	rm -rf ./$(EXEC)
 
 all: default run
+
+cc : 
+	$(VALAC) -C $(VALAFILES) -o $(EXEC) $(VALAPKGS) $(VALAOPTS)
 	
