@@ -20,4 +20,8 @@ all: default run
 
 cc : 
 	$(VALAC) -C $(VALAFILES) -o $(EXEC) $(VALAPKGS) $(VALAOPTS)
-	
+
+debug :
+	$(VALAC) -g --save-temps $(VALAFILES) -o $(EXEC) $(VALAPKGS) $(VALAOPTS)
+	gdb $(EXEC)
+
