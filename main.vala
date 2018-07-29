@@ -11,6 +11,13 @@ class MainProgram
 
     private static bool testScreen(Widget widget, Gdk.EventAny e)
     {
+        if(!saved)
+        {
+            Gtk.main_quit();
+            return true;
+        }
+
+
         dialog = new ClosingFile(ref window);
         dialog.save_file_handler.connect(MainProgram.save);
         return true;
