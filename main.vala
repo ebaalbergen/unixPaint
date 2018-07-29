@@ -2,14 +2,15 @@ using Gtk;
 
 class MainProgram
 {
-    private static string[] args;
+    private string[] args;
 
-    private static bool saved;
+    private bool saved;
 
-    private static Window window;
-    private static ClosingFile dialog;
+    private Window window;
+    private ClosingFile dialog;
 
-    private static bool testScreen(Widget widget, Gdk.EventAny e)
+    [CCode (instance_pos = -1)]
+    private bool testscreen(Widget widget, Gdk.EventAny e)
     {
         if(!saved)
         {
@@ -19,11 +20,11 @@ class MainProgram
 
 
         dialog = new ClosingFile(ref window);
-        dialog.save_file_handler.connect(MainProgram.save);
+        dialog.save_file_handler.connect(this.save);
         return true;
     }
 
-    public static void save(bool saving)
+    public void save(bool saving)
     {
         if(saving)
         {
@@ -34,13 +35,32 @@ class MainProgram
         }
     }
 
-    public static void main(string[] args)
+    public MainProgram(string[] args)
     {
-        MainProgram.args = args;
+        this.args = args;
         saved = false;
         Gtk.init(ref args);
 
-        window = new Window();
+    }
+
+    public void run()
+    {
+        try
+        {
+            var builder = new Builder ();
+            builder.add_from_file("userInterfaces/mainScreen.ui");
+            builder.connect_signals(this);
+            window = builder.get_object ("window") as Window;
+
+            MenuModel menubar = builder.get_object ("menubar") as MenuModel;
+            window.show_all();
+        }
+        catch
+        {
+            print("Error while opening window.");
+        }
+
+        /*window = new Window();
 
         window.title = "unixPaint";
 
@@ -84,8 +104,14 @@ class MainProgram
 		fileSubMenu.add (item_exit);
 
         window.add(button);
-        window.show_all();
+        window.show_all();*/
 
         Gtk.main();
     }
+}
+
+void main(string[] args)
+{
+    MainProgram mainProgram = new MainProgram(args);
+    mainProgram.run();
 }
