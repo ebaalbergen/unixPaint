@@ -56,6 +56,33 @@ class MainProgram
             saved=true;
         });
 
+        MenuBar bar = new MenuBar();
+
+        window.add(bar);
+
+        Gtk.MenuItem fileMenu = new Gtk.MenuItem.with_label("File");
+        bar.add(fileMenu);
+
+        Gtk.Menu fileSubMenu = new Gtk.Menu();
+        fileMenu.set_submenu(fileSubMenu);
+
+        Gtk.MenuItem item_open = new Gtk.MenuItem.with_label ("Open");
+		item_open.activate.connect (() => {
+			FileChooserDialog chooser = new FileChooserDialog (
+					"Select your favorite file", window, FileChooserAction.OPEN,
+					"_Cancel",
+					ResponseType.CANCEL,
+					"_Open",
+					ResponseType.ACCEPT);
+			chooser.run ();
+			chooser.close ();
+		});
+		fileSubMenu.add (item_open);
+
+        Gtk.MenuItem item_exit = new Gtk.MenuItem.with_label ("Exit");
+		item_exit.activate.connect (Gtk.main_quit);
+		fileSubMenu.add (item_exit);
+
         window.add(button);
         window.show_all();
 
