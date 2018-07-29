@@ -12,13 +12,11 @@ class UnixPaint
     [CCode (instance_pos = -1)]
     public bool exitHandlerClose(Widget widget, Gdk.EventAny e)
     {
-        print("1");
         return exit();
     }
 
     public void exitHandlerMenu(Gtk.MenuItem button, Gdk.EventAny e)
     {
-        print("2");
         exit();
     }
 
