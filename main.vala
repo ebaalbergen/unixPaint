@@ -12,11 +12,14 @@ class UnixPaint
     [CCode (instance_pos = -1)]
     public bool exitHandlerClose(Widget widget, Gdk.EventAny e)
     {
+        print(saved.to_string());
         return exit();
     }
 
-    public void exitHandlerMenu(Gtk.MenuItem button, Gdk.EventAny e)
+    [CCode (instance_pos = -1)]
+    public void exitHandlerMenu()
     {
+        print(saved.to_string());
         exit();
     }
 
@@ -38,7 +41,7 @@ class UnixPaint
         if(saving)
         {
             print("Save");
-            saved = true;
+            // saved = true;
         } else
         {
             Gtk.main_quit();
